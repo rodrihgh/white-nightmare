@@ -1,5 +1,7 @@
 # White Nightmare
 
+![White nightmare](media/white_nightmare.gif)
+
 Repository for my project "White Nightmare".
 Check the documentation on
 [my website](https://rodrihgh.github.io/projects/white-nightmare).

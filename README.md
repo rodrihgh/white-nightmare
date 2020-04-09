@@ -1,6 +1,6 @@
 # White Nightmare
 
-![White nightmare](media/white_nightmare.gif)
+![White nightmare](media/white-nightmare.gif)
 
 Repository for my project "White Nightmare".
 Check the details on

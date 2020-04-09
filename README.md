@@ -3,7 +3,7 @@
 ![White nightmare](media/white_nightmare.gif)
 
 Repository for my project "White Nightmare".
-Check the documentation on
+Check the details on
 [my website](https://rodrihgh.github.io/projects/white-nightmare).
 
 ## Requirements

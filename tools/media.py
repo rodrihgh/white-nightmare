@@ -54,11 +54,12 @@ def frameshow(frame, v=None, cmap='gist_gray'):
     return f, im
 
 
-def animation(frames, fps=fps_default, cmap='gist_gray', v=None, filename=None):
+def animation(frames, fps=fps_default, resolution=None, cmap='gist_gray', v=None, filename=None):
     """
     Create (and save) an animation from a frame array
     :param frames: Frame array.
     :param fps: Frames per second.
+    :param resolution: Video resolution expressed as a number, e.g. 1080
     :param cmap: Colour mapping used by matplotlib.
     :param v: Tuple with lower and upper values for the colour axis. If None, use the min and max for the last frame.
     :param filename: Filename to save the animation. Accepted extensions are mp4 and gif.
@@ -67,6 +68,12 @@ def animation(frames, fps=fps_default, cmap='gist_gray', v=None, filename=None):
     """
 
     f, im = frameshow(frames[-1, ], v=v, cmap=cmap)
+
+    if resolution is None:
+        dpi = None
+    else:
+        w = min(f.get_size_inches())
+        dpi = resolution / w
 
     def update(num, data, img):
         img.set_data(data[num, ])
@@ -91,7 +98,7 @@ def animation(frames, fps=fps_default, cmap='gist_gray', v=None, filename=None):
         else:
             raise ValueError(f"{ext} files are not supported. Try using {mp4} or {gif} instead")
 
-        im_ani.save(str(savepath), writer=writer(fps=fps, metadata=dict(artist='Me'), bitrate=-1))
+        im_ani.save(str(savepath), dpi=dpi, writer=writer(fps=fps, metadata=dict(artist='Me'), bitrate=-1))
 
 
 def audio(adsr_times, adsr_levels, filename, n_ch=2, f_c=8000, fs=44100):

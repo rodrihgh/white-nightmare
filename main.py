@@ -50,18 +50,17 @@ if __name__ == "__main__":
           f"Total duration is {round(total_sec, 1)} seconds.")
 
     print("Rendering transition from noise to maze.")
-    transition = sp.render_transition(maze, maze_history, fadein_frames, alpha_stop,
-                                      **bg_args, upfactor=wall_thickness)
+    canvas = sp.render_transition(maze, maze_history, fadein_frames, alpha_stop,
+                                  **bg_args, upfactor=wall_thickness)
     print("Rendering transition from maze to noise.")
-    transition_decay = sp.insert_frames(transition, sustain_frames + end_frames, pos=-1, ref=-1)
-    transition_decay[-end_frames:, ] = sp.fade_out(transition_decay[-end_frames:, ],
-                                                   alpha_stop, downsample=wall_thickness, **bg_args)
+    canvas = sp.insert_frames(canvas, sustain_frames + end_frames, pos=-1, ref=-1)
+    canvas[-end_frames:, ] = sp.fade_out(canvas[-end_frames:, ],
+                                         alpha_stop, downsample=wall_thickness, **bg_args)
     print("Prepending noise frames.")
-    rise_transition_decay = sp.insert_frames(transition_decay, start_frames, pos=0, ref=None,
-                                             downsample=wall_thickness, **bg_args)
+    canvas = sp.insert_frames(canvas, start_frames, pos=0, ref=None,
+                              downsample=wall_thickness, **bg_args)
     print("Shifting maze.")
-    shifted_maze = sp.shift_video(rise_transition_decay, alpha_shift, alpha_t, max_shift)
-    canvas = shifted_maze[:, :-wall_thickness, :-wall_thickness]
+    canvas = sp.shift_video(canvas, alpha_shift, alpha_t, max_shift)
     print("Adding fine-grain noise.")
     canvas = sp.add_wgn(canvas, noise_std)
 

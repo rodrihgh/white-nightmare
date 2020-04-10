@@ -1,3 +1,4 @@
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rodrihgh/white-nightmare/blob/master/colab.ipynb)
 # White Nightmare
 
 ![White nightmare](media/white-nightmare.gif)
